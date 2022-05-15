@@ -1,0 +1,55 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= settings.website.title %></title>
+    <meta name="author" content="Acktar">
+    <meta name="description" content="<%= settings.website.description %>">
+    <meta name="keywords" content="free hosting, free mc server, free minecraft server hosting, discord bot, free discord bot hosting, pterodactyl panel, uptodate softwares, serverkur, serverkur hosting, fivem server, terarria server, nginx webserver, free host" />
+    <link rel="canonical" href="<%= settings.website.link %>">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= settings.website.link %>">
+    <meta property="og:title" content="<%= settings.website.title %>">
+    <meta property="og:description" content="<%= settings.website.description %>">
+    <meta property="og:image" content="<%= settings.website.banner %>">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<%= settings.website.link %>">
+    <meta property="twitter:title" content="<%= settings.website.title %>">
+    <meta property="twitter:description" content="<%= settings.website.description %>">
+    <meta property="twitter:image" content="<%= settings.website.banner %>">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="<%= settings.website.favicon %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= settings.website.favicon %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= settings.website.favicon %>">
+    <meta name="msapplication-TileColor" content="<%= settings.website.color %>">
+    <meta name="theme-color" content="<%= settings.website.color %>">
+    <!-- base:css -->
+    <link rel="stylesheet" href="./assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./assets/vendors/css/vendor.bundle.base.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="./assets/images/favicon.png" />
+    <script>
+  function refreshTime() { // cuz why not
+    const timeDisplay = document.getElementById("time");
+    const dateString = new Date().toLocaleString();
+    const formattedString = dateString.replace(", ", " - ");
+    timeDisplay.textContent = formattedString;
+  }
+  setInterval(refreshTime, 1000);
+  </script>
+   <style>
+    #afk_disconnected {
+      display: none;
+    }
+  </style>
+  <!-- arc.io-->
+  <script async src="https://arc.io/widget.min.js#<% settings.afk.arc_id %>"></script>
+</head>

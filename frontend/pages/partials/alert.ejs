@@ -1,0 +1,18 @@
+<% if (variables) { %>
+    <% if (variables.error && status_replies.error[variables.error]) { %>
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Oops!</h4>
+        <p><%- eval(`\`${status_replies.error[variables.error]}\``) %></p>
+        </div>
+     <% } else if (variables.success && status_replies.success[variables.success]) { %>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p><%- eval(`\`${status_replies.success[variables.success]}\``) %></p>
+        </div>
+        <% } else { %>
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <p><%= JSON.stringify(variables) %></p>
+            </div>
+    <% } %>
+<% } %>

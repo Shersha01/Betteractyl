@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include('./partials/head') %>
+
+<body onload="refreshTime()">
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+    <%- include('./partials/sidebar') %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <%- include('./partials/navbar') %>
+    <!-- Modal Content -->
+      <%- include('./partials/modals') %>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+           <!-- row end -->
+           <%- include('./partials/cards') %>
+          <!-- row end -->
+          <div class="row">
+            <%- include('./partials/alert') %>
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h3><center><b>Purchase additional Resources</b></center></h3>
+                <hr>
+                    <form class="forms-sample" action="/store/buy_resources" id="buyresources" method="POST">
+                    <div class="form-group">
+                      <label for="memory">Memory: (<%= (settings.store.memory.per/1024) %>GB costs <%= settings.store.memory.cost %> coins)</label>
+                      <select class="form-control" name="memory" id="memory">
+                        <option selected value="">None</option>
+                        <option value="1024">1 Gb</option>
+                        <option value="2048">2 Gb</option>
+                        <option value="3072">3 Gb</option>
+                        <option value="4096">4 Gb</option>
+                        <option value="5120">5 Gb</option>
+                        <option value="6144">6 Gb</option>
+                        <option value="7168">7 Gb</option>
+                        <option value="8192">8 Gb</option>
+                        <option value="9216">9 Gb</option>
+                        <option value="10240">10 Gb</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="disk">Disk: (<%= (settings.store.disk.per/1024) %>GB costs <%= settings.store.disk.cost %> coins)</label>
+                      <select class="form-control" name="disk" id="disk">
+                        <option selected value="">None</option>
+                        <option value="1024">1 Gb</option>
+                        <option value="2048">2 Gb</option>
+                        <option value="3072">3 Gb</option>
+                        <option value="4096">4 Gb</option>
+                        <option value="5120">5 Gb</option>
+                        <option value="6144">6 Gb</option>
+                        <option value="7168">7 Gb</option>
+                        <option value="8192">8 Gb</option>
+                        <option value="9216">9 Gb</option>
+                        <option value="10240">10 Gb</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="cpu">CPU: (<%= settings.store.cpu.per %>% costs <%= settings.store.cpu.cost %> coins)</label>
+                      <select class="form-control" name="cpu" id="cpu">
+                        <option selected value="">None</option>
+                        <option value="10">10 %</option>
+                        <option value="20">20 %</option>
+                        <option value="30">30 %</option>
+                        <option value="40">40 %</option>
+                        <option value="50">50 %</option>
+                        <option value="60">60 %</option>
+                        <option value="70">70 %</option>
+                        <option value="80">80 %</option>
+                        <option value="90">90 %</option>
+                        <option value="100">100 %</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="servers">Servers: (<%= settings.store.servers.per %> server costs <%= settings.store.servers.cost %> coins)</label>
+                      <select class="form-control" name="servers" id="servers">
+                        <option selected value="">None</option>
+                        <option value="1">1 server</option>
+                        <option value="2">2 servers</option>
+                        <option value="3">3 servers</option>
+                        <option value="4">4 servers</option>
+                        <option value="5">5 servers</option>
+                        <option value="6">6 servers</option>
+                        <option value="7">7 servers</option>
+                        <option value="8">8 servers</option>
+                        <option value="9">9 servers</option>
+                        <option value="10">10 servers</option>
+                      </select>
+                    </div>
+                    <input type="submit" class="btn btn-primary me-2" value="Continue">
+                     </form>
+                </div>
+              </div>
+            </div>
+        <!-- content-wrapper ends -->
+        <%- include('./partials/footer') %>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <%- include('./partials/scripts') %>
+</body>
+
+</html>

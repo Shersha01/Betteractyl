@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include('./partials/head') %>
+
+<body onload="refreshTime()">
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+     <%- include('./partials/sidebar') %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <%- include('./partials/navbar') %>
+    <!-- Modal Content -->
+      <%- include('./partials/modals') %>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+           <!-- row end -->
+           <%- include('./partials/cards') %>
+          <!-- row end -->
+          <div class="row">
+            <%- include('./partials/alert') %>
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h3><center><b>Deploy a new server</b></center></h3>
+                  <hr>
+                  <p><b><center>Free nodes require you to pay <%= settings.renewal.renew_fee %> coins to create a server, and require you to renew the server every 2 weeks.</center></b></p>
+                   <hr>
+                  <form action="/servers/create" method="POST" class="forms-sample">
+                    <div class="form-group">
+                      <label for="name">Server Name</label>
+                      <input type="text" class="form-control" name="name" placeholder="NObody loves me:( wanna be friends? - Acktar">
+                    </div>
+                    <div class="form-group">
+                      <label for="memory">Ram Allocated</label>
+                      <input type="text" class="form-control"name="memory" placeholder="<%= total.memory - current.memory %> mb left" aria-label="<%= total.memory - current.memory %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="disk">Disk Allocated</label>
+                      <input type="text" class="form-control" name="disk" placeholder="<%= total.disk - current.disk %> mb left" aria-label="<%= total.disk - current.disk %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="cpu">CPU Allocated</label>
+                      <input type="text" class="form-control" name="cpu" placeholder="<%= total.cpu - current.cpu %> % left" aria-label="<%= total.cpu - current.cpu %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="location">Server Location</label>
+                      <select class="form-control"  id="location" name="location" aria-label="location">
+                        <% for (let [name, value] of Object.entries(settings.locations).filter(loc => loc[1].enabled && (loc[1].package ? loc[1].package.includes(package.id) : true))) { %>
+                          <option value="<%= name %>"><%= value.name %></option>
+                          <% } %>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="egg">Server Engine</label>
+                      <select class="form-control"  id="egg" name="egg" aria-label="egg">
+                        <% for (let [name, value] of Object.entries(settings.eggs)) { %>
+                          <option value="<%= name %>"><%= value.display %></option>
+                          <% } %>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Continue</button>
+                    <button class="btn btn-dark">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+        <%- include('./partials/footer') %>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <%- include('./partials/scripts') %>
+</body>
+
+</html>

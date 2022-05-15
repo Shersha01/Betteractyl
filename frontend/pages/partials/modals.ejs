@@ -1,0 +1,54 @@
+<!-- Modal Content -->
+<div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Your Panel Credentials</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><b>Username:</b> <%= data.panelinfo.username %></p>
+              <p><b>Email:</b> <%= data.panelinfo.email %></p>
+              <p><b>Control Panel:</b> <a href="<%= settings.pterodactyl.domain %>">Click me</a></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light btn-fw" data-bs-dismiss="modal">Close</button>
+              <form action="/accounts/regenerate_password" method="POST">
+                <input type="submit" class="btn btn-primary btn-fw" value="Regenerate Password">
+              </form>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Content -->
+
+<!-- Modal Content -->
+<div class="modal fade" id="modal-redeem" tabindex="-1" role="dialog" aria-labelledby="modal-redeem" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2 class="h6 modal-title">Redeem a Coupon</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/earn/redeem_coupon" method="POST">
+          <div class="modal-body">
+             <!-- Form -->
+             <div class="mb-3">
+              <div class="input-group">
+                  <input type="text" class="form-control" id="code" name="code" placeholder="Enter your Coupon Code here" aria-label="Enter your Coupon Code here">
+                  <span class="input-group-text" id="basic-addon2">
+                    <i class="mdi mdi-gift"></i>
+                  </span>
+              </div>
+          </div>
+          <!-- End of Form -->
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light btn-fw" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary btn-fw" value="Redeem Code">
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- End of Modal Content -->

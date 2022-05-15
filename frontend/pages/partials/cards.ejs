@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card bg-facebook d-flex align-items-center">
+        <div class="card-body py-5">
+          <div
+            class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+            <i class="mdi mdi-cloud text-white icon-lg"></i>
+            <div class="ms-3 ml-md-0 ml-xl-3">
+              <h5 class="text-white font-weight-bold">Memory</h5>
+              <p class="mt-2 text-white card-text"><%= current.memory %> / <%= total.memory %>MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card bg-facebook d-flex align-items-center">
+        <div class="card-body py-5">
+          <div
+            class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+            <i class="mdi mdi-folder text-white icon-lg"></i>
+            <div class="ms-3 ml-md-0 ml-xl-3">
+              <h5 class="text-white font-weight-bold">Disk</h5>
+              <p class="mt-2 text-white card-text"><%= current.disk %> / <%= total.disk %>MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card bg-facebook d-flex align-items-center">
+        <div class="card-body py-5">
+          <div
+            class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+            <i class="mdi mdi-airplay text-white icon-lg"></i>
+            <div class="ms-3 ml-md-0 ml-xl-3">
+              <h5 class="text-white font-weight-bold">Package</h5>
+              <p class="mt-2 text-white card-text"><%= package.display %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

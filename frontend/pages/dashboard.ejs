@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body onload="refreshTime()">
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+    <%- include('./partials/sidebar') %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+      <%- include('./partials/navbar') %>
+  <!-- Modal Content -->
+  <%- include('./partials/modals') %>
+<!-- End of Modal Content -->
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+           <!-- row end -->
+           <%- include('./partials/cards') %>
+          <!-- row end -->
+          <div class="row">
+            <%- include('./partials/alert') %>
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Active Servers</h4>
+                <div class="table-responsive">
+                  <% if (!current.servers) { %>
+                    <h3><center><b>It looks like you dont have any servers</b></center></h3>
+                   </div>
+                </div>
+                    <% } else { %>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th> Name </th>
+                        <th> Memory </th>
+                        <th> Disk </th>
+                        <th> CPU </th>
+                        <th> Renew By </th>
+                        <th> Action </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% let currentDate = Date.now() %>
+                      <% for (let server of data.panelinfo.relationships.servers.data) { %>
+                      <tr>
+                        <td>  <%= server.attributes.name.length> 15 ? server.attributes.name.slice(0, 12) + "..." : server.attributes.name %> </td>
+                          <td> <%= server.attributes.limits.memory %> mb </td>
+                          <td> <%= server.attributes.limits.disk %> mb </td>
+                          <td> <%= server.attributes.limits.cpu %>% </td>
+                          <td> 
+                            <% if (Object.entries(settings.eggs).filter(egg => server.attributes.egg == egg[1].info.egg).length == 1) { %>
+                              <% if (server_timers[server.attributes.id] && server_timers[server.attributes.id].action !== "???") { %>
+                                  <% // https://stackoverflow.com/questions/9763441/milliseconds-to-time-in-javascript
+                                      let s = server_timers[server.attributes.id].timer - currentDate;
+                                      if (s < 0) s = 0;
+                                      let ms = s % 1000;
+                                      s = (s - ms) / 1000;
+                                      let secs = s % 60;
+                                      s = (s - secs) / 60;
+                                      let mins = s % 60;
+                                      let hrs = (s - mins) / 60;
+                                      let output = hrs + ' hours';
+                                  %>
+                                  <% if (server_timers[server.attributes.id].action == "auto") { %>
+                                    <font color="green">Automatically renewing in: <%= output %></font>
+                                  <% } else if (server_timers[server.attributes.id].action == "suspend") { %>
+                                      <%= output %>
+                                  <% } else if (server_timers[server.attributes.id].action == "deletion") { %>
+                                    <font color="red">Server deleting in: <%= output %><br><b> RENEW ASAP</b></font>
+                                    <% } %>
+                                    <% } else { %>
+                                        None.
+                                    <% } %>
+                                <% } %>
+                          </td>
+                          <td>
+                            <%
+                            let renewcost;
+                            let renewcoststring;
+                            renewcoststring = settings.renewal.renew_fee + " coin" + (settings.renewal.renew_fee == 1 ? "" : "s");
+                        %>
+
+                        <% if (server_timers[server.attributes.id] && server_timers[server.attributes.id].action !== "???") { %>
+                        <form action="/servers/renew/<%= server.attributes.id %>" method="POST">
+                            <input type="submit" id="one" style="display: none" value="Renew (<%= renewcoststring %>)">
+                        </form>
+                        
+                        <button type="button" onclick="document.getElementById('three').click()" class="btn btn-danger"> Delete </button> | 
+                        <button type="button" onclick="document.getElementById('one').click()" class="btn btn-success"> Renew </button> <% if (server_timers[server.attributes.id].action !== "deletion") { %>| 
+                        <button type="button" onclick="document.getElementById('two').click()" class="btn btn-success"> <%= server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %> Automatic Renewal </button><% } %>
+
+                          <% if (server_timers[server.attributes.id].action !== "deletion") { %>
+                            <form action="/servers/auto_renew/<%= server.attributes.id %>" method="POST">
+                                <% let toggle_type = server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %>
+                                <input type="submit" style="display: none" id="two" value="<%= toggle_type %> automatic renewals.">
+                            </form>
+                          <% } %>
+                        <% } else { %>
+                          <button type="button" onclick="document.getElementById('three').click()" class="btn btn-danger"> Delete </button>
+                        <% } %>
+
+                        <% if (Object.entries(settings.eggs).filter(egg=> server.attributes.egg == egg[1].info.egg).length == 1) { %>
+                            <form action="/servers/renew/<%= server.attributes.id %>" method="POST">
+                                <input type="submit" style="display: none;">
+                            </form>
+                        <% } %>
+                        <form action="/servers/delete/<%= server.attributes.id %>" method="POST">
+                            <input type="submit" id="three"style="display: none;"value="Delete">
+                        </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <%- include('./partials/footer') %>
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <%- include('./partials/scripts') %>
+</body>
+
+</html>
